@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1231871286464104212}
   - component: {fileID: 1231871286464104213}
   - component: {fileID: 1231871286464104210}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PowerUpShoot
   m_TagString: Powerup
   m_Icon: {fileID: 0}
@@ -74,6 +74,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -121,4 +122,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cafa5b42360ab41a9d60c6fcf51e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 7

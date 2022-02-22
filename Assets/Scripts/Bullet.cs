@@ -6,10 +6,33 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public GameObject hitEffect;
-    void OnCollisionEnter2D(Collision2D collision)
+    private int resistance = 0;
+
+    void Start()
+    {
+        Destroy(gameObject, 5f);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(effect, .3f);
-        Destroy(gameObject);
+        if(resistance <= 0)
+        {
+            Destroy(gameObject);
+        } else
+        {
+            resistance--;
+        }
+        
+    }
+    public void SetResistance(int resistance)
+    {
+        this.resistance = resistance;
+    }
+
+    public int GetResistance()
+    {
+        return resistance;
     }
 }

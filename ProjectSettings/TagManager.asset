@@ -10,6 +10,7 @@ TagManager:
   - Text
   - MommyMole
   - HealthBar
+  - MoL
   layers:
   - Default
   - TransparentFX

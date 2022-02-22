@@ -9,7 +9,7 @@ public class Damage : MonoBehaviour
     public HealthBar healthBar;
     public GameObject player;
 
-    public float amount = 10f;
+    public float amount = 0.5f;
 
     private void Start()
     {
@@ -19,41 +19,22 @@ public class Damage : MonoBehaviour
         healthBar = health.GetComponent<HealthBar>();
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Mole"))
         {
-
-            if (playerHealth != null)
-            {
-
-                if (playerHealth.currentHealth < playerHealth.maxHealth)
-                {
-                    playerHealth.currentHealth += amount;
-                    healthBar.SetHealth(playerHealth.currentHealth);
-                }
-
-            }
+            col.gameObject.GetComponent<DiggingMoleMovement>().TakeDamage();
             //FindObjectOfType<AudioManager>().Play("MoleHurt");
-            Destroy(col.gameObject);
-
         }
         if (col.gameObject.CompareTag("MommyMole"))
         {
-
-            if (playerHealth != null)
-            {
-
-                if (playerHealth.currentHealth < playerHealth.maxHealth)
-                {
-                    playerHealth.currentHealth += amount * 10;
-                    healthBar.SetHealth(playerHealth.currentHealth);
-                }
-
-            }
-
             //FindObjectOfType<AudioManager>().Play("MoleHurt");
-            Destroy(col.gameObject);
+            col.gameObject.GetComponent<DiggingMoleMovement>().TakeDamage();
+        }
+        if (col.gameObject.CompareTag("MoL"))
+        {
+            //FindObjectOfType<AudioManager>().Play("MoleHurt");
+            col.gameObject.GetComponent<DiggingMoleMovement>().TakeDamage();
         }
     }
 

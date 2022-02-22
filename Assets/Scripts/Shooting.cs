@@ -8,14 +8,30 @@ public class Shooting : MonoBehaviour
 
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public GameObject rapidBulletPrefab;
     public BoxCollider2D playerCollider;
     private BoxCollider2D bulletCollider;
 
+    public int resistance = 0;
     public float bulletForce = 5f;
     public bool hasPowerup = false;
-    private int timer = 1;
-    public int timerCount = 1;
+    private float shootTimer;
+    public float normalShootTime = 0.2f;
+    public float powerUpShootTime = 0.05f;
     public bool hasShootControl = true;
+    private float powerUpTimer;
+    public float PowerUpTimer {
+        get
+        {
+            return powerUpTimer;
+        }
+        set
+        {
+            powerUpTimer = value;
+        }
+    }
+
+    void Start() { shootTimer = normalShootTime; }
 
     void Update()
     {
@@ -23,48 +39,44 @@ public class Shooting : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 9);
         Physics2D.IgnoreLayerCollision(9, 9);
 
-        if (hasShootControl == true)
+        if (hasShootControl)
         {
-
-            if (Input.GetButtonDown("Fire1") && hasPowerup == false)
+            if (Input.GetButton("Fire1") && shootTimer <= 0f)
             {
-                Shoot();
+                Shoot(powerUpTimer > 0);
             }
-
         }
 
-    }
-
-    private void FixedUpdate()
-    {
-
-        if (hasShootControl == true)
+        if(powerUpTimer > 0)
         {
-            if (hasPowerup == true)
-            {
-                if (Input.GetButton("Fire1") && timer <= 0)
-                {
-
-                    timer = timerCount;
-                    Shoot();
-                }
-            }
-            timer -= 1;
+            powerUpTimer -= Time.deltaTime;
         }
-
+        shootTimer -= Time.deltaTime;
     }
 
-    void Shoot()
+    void Shoot(bool powerUp)
     {
-        //FindObjectOfType<AudioManager>().Play("Shoot");
+        FindObjectOfType<AudioManager>().Play("Shoot");
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bullet;
+        if (powerUp)
+        {
+            shootTimer = powerUpShootTime;
+            bullet = Instantiate(rapidBulletPrefab, firePoint.position, firePoint.rotation);
+        } else
+        {
+            shootTimer = normalShootTime;
+            bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        }
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.SetResistance(resistance);
+
+
+
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
 
         rb.rotation = rb.rotation + 180;
-
-        
     }
 
 }

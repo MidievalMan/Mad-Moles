@@ -18,16 +18,26 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 movement;
 
-    private void Awake()
+    private void Start()
     {
-        //FindObjectOfType<AudioManager>().Play("BemyBMowdown");
+        FindObjectOfType<AudioManager>().Play("BemyBMowdown");
     }
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            Time.timeScale *= 2;
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Time.timeScale /= 2;
+        }
+
         // Receive Player Input
         if (hasControl == true)
         {
+
             if (Input.GetButton("Jump"))
             {
                 moveSpeed = .9f;
@@ -41,6 +51,11 @@ public class PlayerMovement : MonoBehaviour
             movement.x = Input.GetAxis("Horizontal");
             movement.y = Input.GetAxis("Vertical");
 
+            if(movement.magnitude < 0.01f)
+            {
+                movement = Vector2.zero;
+            }
+
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
             animator.SetFloat("Speed", movement.sqrMagnitude);
@@ -53,13 +68,14 @@ public class PlayerMovement : MonoBehaviour
         // Execute Player Movement
         if (hasControl == true)
         {
+
             rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
 
             if (movement.x != 0 || movement.y != 0)
             {
                 if (walkTimer <= 0)
                 {
-                    //FindObjectOfType<AudioManager>().Play("PlayerMove");
+                    FindObjectOfType<AudioManager>().Play("PlayerMove");
                     walkTimer += walkTimerAmount;
                 }
 

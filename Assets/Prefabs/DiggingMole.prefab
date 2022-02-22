@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3278827593841992547}
   - component: {fileID: 3278827593841992546}
   - component: {fileID: 275863437488213496}
+  - component: {fileID: 8281702500353708331}
   m_Layer: 0
   m_Name: DiggingMole
   m_TagString: Mole
@@ -50,6 +51,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -95,7 +97,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.024335455}
@@ -123,7 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e285572d4b59e4a8204c7d9195794f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 1
   player: {fileID: 0}
+  moleSpawner: {fileID: 6147172961353837344, guid: 76bc5fa3f17eac44fae22bb212f189e2,
+    type: 3}
   movement: {x: 0, y: 0}
   moveSpeed: 0.25
   direction: {x: 0, y: 0, z: 0}
@@ -167,3 +172,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &8281702500353708331
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278827593841992545}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.049332827}
+  serializedVersion: 2
+  m_Radius: 0.03829877
