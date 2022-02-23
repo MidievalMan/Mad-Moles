@@ -1540,3 +1540,63 @@ System memory in use after: 56.8 MB.
 Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2729.
 Total: 2.506800 ms (FindLiveObjects: 0.251500 ms CreateObjectMapping: 0.062600 ms MarkObjects: 2.160700 ms  DeleteObjects: 0.030000 ms)
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004594 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.979 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.70 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2093 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 97.6 MB.
+System memory in use after: 97.9 MB.
+
+Unloading 17 unused Assets to reduce memory usage. Loaded Objects now: 2732.
+Total: 2.915800 ms (FindLiveObjects: 0.328000 ms CreateObjectMapping: 0.107200 ms MarkObjects: 2.454200 ms  DeleteObjects: 0.024500 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 1215.375584 seconds.
+  path: Assets/Fonts/6809 chargen.ttf
+  artifactKey: Guid(2f336aef23b7ca34c9e90d21d56d2b16) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/6809 chargen.ttf using Guid(2f336aef23b7ca34c9e90d21d56d2b16) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51af3a736ead0de3ff2faa2acf64ed96') in 0.099982 seconds
+  Import took 0.106986 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004500 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.78 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.982 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.47 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2093 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 97.7 MB.
+System memory in use after: 97.9 MB.
+
+Unloading 17 unused Assets to reduce memory usage. Loaded Objects now: 2739.
+Total: 2.430200 ms (FindLiveObjects: 0.266800 ms CreateObjectMapping: 0.065000 ms MarkObjects: 2.074700 ms  DeleteObjects: 0.022300 ms)
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 6.28 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 15 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 56.7 MB.
+System memory in use after: 56.9 MB.
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 2739.
+Total: 2.300100 ms (FindLiveObjects: 0.239200 ms CreateObjectMapping: 0.057700 ms MarkObjects: 1.983200 ms  DeleteObjects: 0.019000 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

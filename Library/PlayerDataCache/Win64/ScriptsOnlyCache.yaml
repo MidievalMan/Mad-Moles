@@ -1021,5 +1021,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/MoleRoom.unity
   - Assets/Scenes/DeathMenu.unity
   - Assets/Scenes/WinMenu.unity
-  playerPath: C:/Users/Phili/OneDrive/Documents/VideoGameProjects/Mad Moles/Builds/Windows/Mad
+  playerPath: C:/Users/Phili/OneDrive/Documents/VideoGameProjects/Mad Moles/Builds/Windows/v1.1x64/Mad
     Moles.exe
