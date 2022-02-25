@@ -1,10 +1,11 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class Score : MonoBehaviour
 {
 
-    public Text scoreText;
+    public TMP_Text scoreText;
     public static float score = 0f;
 
 

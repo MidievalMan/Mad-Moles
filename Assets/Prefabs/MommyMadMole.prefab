@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7417209968247677837}
   - component: {fileID: 1548222253371817042}
   - component: {fileID: 2444076826456427494}
-  - component: {fileID: 2401293290196750024}
+  - component: {fileID: 5133468673852915921}
   m_Layer: 0
   m_Name: MommyMadMole
   m_TagString: MommyMole
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1a4512bacf26ad0468e49f84f80e3f11, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,12 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e285572d4b59e4a8204c7d9195794f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 8
+  health: 6
   player: {fileID: 0}
   moleSpawner: {fileID: 6147172961353837344, guid: 76bc5fa3f17eac44fae22bb212f189e2,
     type: 3}
+  anim: {fileID: 0}
   movement: {x: 0, y: 0}
-  moveSpeed: 0.75
+  moveSpeed: 5
   direction: {x: 0, y: 0, z: 0}
 --- !u!61 &7417209968247677837
 BoxCollider2D:
@@ -119,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014405131, y: -0.008066863}
+  m_Offset: {x: -0.004219532, y: -0.08785391}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.23356938, y: 0.30386627}
+  m_Size: {x: 1.2317564, y: 1.8215177}
   m_EdgeRadius: 0
 --- !u!50 &1548222253371817042
 Rigidbody2D:
@@ -172,19 +173,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &2401293290196750024
-CircleCollider2D:
+--- !u!70 &5133468673852915921
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441909295599184600}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.08082476}
-  serializedVersion: 2
-  m_Radius: 0.098823234
+  m_Offset: {x: -0.00000008459044, y: -0.7095961}
+  m_Size: {x: 1.5682857, y: 0.58081084}
+  m_Direction: 1

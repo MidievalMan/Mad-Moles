@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpMana : MonoBehaviour
 {
-    public float duration = 10f;
+    public float duration;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -20,8 +20,8 @@ public class PowerUpMana : MonoBehaviour
         //Instantiate(pickupEffect, transform.position, transform.rotation); - Not yet, Maybe later
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         playerHealth.manaAttackLevel += 1;
-        playerHealth.manaRate += 3f;
-        playerHealth.manaRate *= 5;
+        //playerHealth.manaRate += 1f;
+        playerHealth.manaRate *= 3;
         FindObjectOfType<AudioManager>().Play("PowerUpPickedup");
 
         GetComponent<Collider2D>().enabled = false;
@@ -29,7 +29,7 @@ public class PowerUpMana : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
-        playerHealth.manaRate /= 5;
+        playerHealth.manaRate /= 3;
 
         Destroy(gameObject);
     }

@@ -11,10 +11,11 @@ public class DiggingMoleMovement : MonoBehaviour
     public MoleSpawner moleSpawner;
     private Transform mole;
     private Rigidbody2D rb;
-    private CircleCollider2D col;
+    public Animator anim;
+    private CapsuleCollider2D col;
     public Vector2 movement;
 
-    public float moveSpeed = 5f;
+    public float moveSpeed;
     public Vector3 direction;
     private float initializationTime;
 
@@ -24,9 +25,11 @@ public class DiggingMoleMovement : MonoBehaviour
     bool spawning = false;
     bool spawnTrigger = true;
     float maxDashTime = 10f;
+    bool pauseColoring;
 
     private void Start()
     {
+
 
         initializationTime = Time.timeSinceLevelLoad;
 
@@ -34,7 +37,7 @@ public class DiggingMoleMovement : MonoBehaviour
 
         rb = this.GetComponent<Rigidbody2D>();
         mole = this.GetComponent<Transform>();
-        col = this.GetComponent<CircleCollider2D>();
+        col = this.GetComponent<CapsuleCollider2D>();
 
         float num = Random.Range(0.9f, 1.1f);
         moveSpeed *= num;
@@ -71,11 +74,33 @@ public class DiggingMoleMovement : MonoBehaviour
     IEnumerator Dash()
     {
         dashing = false;
+
+        pauseColoring = true;
+        transform.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f);
+        if (anim != null)
+        {
+            anim.SetBool("dashWarning", true);
+        }
+
+        yield return new WaitForSeconds(0.3f);
+        FindObjectOfType<AudioManager>().Play("MoL_Dash");
+        yield return new WaitForSeconds(0.2f);
+
+
+        pauseColoring = false;
+        transform.gameObject.GetComponent<SpriteRenderer>().color = new Color((255 / 255), ((health / 7f) / 255), ((health / 7f) / 255));
+        if (anim != null)
+        {
+            anim.SetBool("dashWarning", false);
+        }
+
+
+
         moveSpeed *= 10f;
         yield return new WaitForSeconds(0.5f);
         moveSpeed /= 10f;
 
-        
+
         yield return new WaitForSeconds(Random.Range(1f, maxDashTime));
         dashing = true;
     }
@@ -84,7 +109,7 @@ public class DiggingMoleMovement : MonoBehaviour
     IEnumerator Spawn()
     {
         spawning = false;
-        StartCoroutine(moleSpawner.SpawnWave(5, 15, true, false));
+        StartCoroutine(moleSpawner.SpawnWave(5, 10, true, false));
         yield return new WaitForSeconds(Random.Range(0f, 5f));
         spawning = true;
     }
@@ -116,21 +141,25 @@ public class DiggingMoleMovement : MonoBehaviour
     {
         health--;
         if(this.CompareTag("MoL")) {
-            if(health < 2000)
+            if(health < 1800)
             {
-                transform.gameObject.GetComponent<SpriteRenderer>().color = new Color((255 / 255), ((health / 7f) / 255), ((health / 7f) / 255));
+                if(!pauseColoring)
+                {
+                    transform.gameObject.GetComponent<SpriteRenderer>().color = new Color((255 / 255), ((health / 7f) / 255), ((health / 7f) / 255));
+                }
+                
             }
-            if(health < 1500 && dashTrigger)
+            if(health < 1350 && dashTrigger)
             {
                 dashing = true;
                 dashTrigger = false;
             }
-            if (health < 1000 && spawnTrigger)
+            if (health < 900 && spawnTrigger)
             {
                 spawning = true;
                 spawnTrigger = false;
             }
-            if (health < 500)
+            if (health < 450)
             {
                 maxDashTime = 3f;
             }

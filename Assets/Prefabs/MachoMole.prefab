@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: -2671800636096387772}
   - component: {fileID: -1824545472586323206}
   - component: {fileID: -5896804092313774142}
-  - component: {fileID: 4153776641599404296}
   - component: {fileID: -3781152128887501684}
   - component: {fileID: -1767928635727999695}
+  - component: {fileID: 1124387789670719234}
   m_Layer: 0
   m_Name: MachoMole
   m_TagString: Mole
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f335da467b6eb7e48a79a1af3eb6d87f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,18 +100,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008533306, y: -0.027179891}
+  m_Offset: {x: -0.11353165, y: -0.12600192}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.24, y: 0.24}
+    oldSize: {x: 1.5, y: 1.5}
     newSize: {x: 0.24, y: 0.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1387401, y: 0.1559191}
+  m_Size: {x: 0.89225745, y: 1.2100198}
   m_EdgeRadius: 0
 --- !u!114 &-5896804092313774142
 MonoBehaviour:
@@ -125,29 +125,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e285572d4b59e4a8204c7d9195794f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 4
   player: {fileID: 0}
   moleSpawner: {fileID: 6147172961353837344, guid: 76bc5fa3f17eac44fae22bb212f189e2,
     type: 3}
+  anim: {fileID: 0}
   movement: {x: 0, y: 0}
-  moveSpeed: 0.5
+  moveSpeed: 3
   direction: {x: 0, y: 0, z: 0}
---- !u!58 &4153776641599404296
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1871881801901869354}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.07723207}
-  serializedVersion: 2
-  m_Radius: 0.059656642
 --- !u!95 &-3781152128887501684
 Animator:
   serializedVersion: 3
@@ -188,3 +173,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &1124387789670719234
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871881801901869354}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.09882131, y: -0.6464605}
+  m_Size: {x: 0.9400128, y: 0.2070804}
+  m_Direction: 1

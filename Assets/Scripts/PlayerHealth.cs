@@ -10,17 +10,16 @@ public class PlayerHealth : MonoBehaviour
 
     public int maxHealth = 500;
     public float currentHealth;
-    public float regen = 0f;
+    public float regen = 5f;
     private float regenTimer;
     private float regenTime = 1;
 
     public int maxMana = 1000;
     public float currentMana;
     public float bulletForce = 5f;
-    public int manaAttackLevel = 3;
+    public int manaAttackLevel = 1;
     public float manaRate = 1;
-    public float manaRateMultiplier = 1.01f;
-    public bool hasManaControl = true;
+    //public float manaRateMultiplier = 1.01f;
 
     public MoleSpawner moleSpawner;
     public HealthBar healthBar;
@@ -57,20 +56,6 @@ public class PlayerHealth : MonoBehaviour
             healthBar.SetHealth(currentHealth);
         }
 
-        if (hasManaControl == true)
-        {
-
-            if (Input.GetButtonDown("Fire2") && currentMana >= 500)
-            {
-                UseMana(500);
-
-                for (int i = 0; i < manaAttackLevel; i++)
-                {
-                    ManaAttack();
-                }
-            }
-
-        }
 
         regenTimer -= Time.deltaTime;
 
@@ -97,7 +82,7 @@ public class PlayerHealth : MonoBehaviour
         }
         if (col.gameObject.tag.Equals("MoL"))
         {
-            TakeDamage(10);
+            TakeDamage(5);
         }
     }
 
@@ -110,8 +95,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
 
-            hasManaControl = false;
-            shooting.hasShootControl = false;
+            shooting.hasControl = false;
             playerMovement.hasControl = false;
             playerMovement.moveSpeed = 0f;
             playerMovement.movement = new Vector2(0, 0);
@@ -124,7 +108,7 @@ public class PlayerHealth : MonoBehaviour
             Invoke("LoadDeathMenu", 2);
 
             moleSpawner.moleTimer = 0;
-            moleSpawner.spawnRate = 2;
+            moleSpawner.spawnRate = 1;
         }
     }
 
@@ -135,18 +119,7 @@ public class PlayerHealth : MonoBehaviour
         manaBar.SetMana(currentMana);
     }
 
-    public void ManaAttack()
-    {
-        FindObjectOfType<AudioManager>().Play("PowerUpManaUse");
 
-        Vector3 spawnLocation = new Vector3(Random.Range(-1.8f, 1.9f), .9f, 0);
-
-        GameObject bullet = Instantiate(bulletPrefab, spawnLocation, transform.rotation);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector3(0,-1,0) * bulletForce / 2, ForceMode2D.Impulse);
-
-        rb.rotation = rb.rotation + 180;
-    }
 
     void LoadDeathMenu()
     {

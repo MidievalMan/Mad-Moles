@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3278827593841992547}
   - component: {fileID: 3278827593841992546}
   - component: {fileID: 275863437488213496}
-  - component: {fileID: 8281702500353708331}
+  - component: {fileID: 9089905622942782749}
   m_Layer: 0
   m_Name: DiggingMole
   m_TagString: Mole
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ca011f4d837046c428901ac35bed3cf7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,18 +100,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.024335455}
+  m_Offset: {x: -0.03584282, y: -0.15541768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.07900696, y: 0.110408135}
+  m_Size: {x: 0.6217692, y: 0.69618165}
   m_EdgeRadius: 0
 --- !u!114 &3278827593841992547
 MonoBehaviour:
@@ -129,8 +129,9 @@ MonoBehaviour:
   player: {fileID: 0}
   moleSpawner: {fileID: 6147172961353837344, guid: 76bc5fa3f17eac44fae22bb212f189e2,
     type: 3}
+  anim: {fileID: 0}
   movement: {x: 0, y: 0}
-  moveSpeed: 0.25
+  moveSpeed: 1.5
   direction: {x: 0, y: 0, z: 0}
 --- !u!50 &3278827593841992546
 Rigidbody2D:
@@ -172,19 +173,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &8281702500353708331
-CircleCollider2D:
+--- !u!70 &9089905622942782749
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3278827593841992545}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.049332827}
-  serializedVersion: 2
-  m_Radius: 0.03829877
+  m_Offset: {x: 0.017409695, y: -0.40553585}
+  m_Size: {x: 0.727598, y: 0.18892965}
+  m_Direction: 1

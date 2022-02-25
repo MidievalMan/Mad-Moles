@@ -7,7 +7,8 @@ using UnityEngine.UIElements;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float moveSpeed = .6f;
+    private float MOVE_SPEED;
+    public float moveSpeed;
     public int walkTimerAmount = 10;
     private int walkTimer = 0;
     public bool hasControl = true;
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         FindObjectOfType<AudioManager>().Play("BemyBMowdown");
+
+        MOVE_SPEED = moveSpeed;
     }
 
     void Update()
@@ -40,18 +43,18 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButton("Jump"))
             {
-                moveSpeed = .9f;
+                moveSpeed = MOVE_SPEED * 1.5f;
                 animator.SetBool("Running", true);
             }
             else
             {
-                moveSpeed = .6f;
+                moveSpeed = MOVE_SPEED;
                 animator.SetBool("Running", false);
             }
             movement.x = Input.GetAxis("Horizontal");
             movement.y = Input.GetAxis("Vertical");
 
-            if(movement.magnitude < 0.01f)
+            if(movement.magnitude < 0.05f)
             {
                 movement = Vector2.zero;
             }

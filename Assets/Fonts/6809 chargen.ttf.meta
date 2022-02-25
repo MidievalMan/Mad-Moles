@@ -8,7 +8,6 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: 6809 Chargen
   fontNames:
   - 6809 Chargen
   fallbackFontReferences: []

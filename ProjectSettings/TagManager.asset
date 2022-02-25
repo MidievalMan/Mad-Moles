@@ -45,6 +45,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 2204385145
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Border
+    uniqueID: 3977786077
+    locked: 0
+  - name: UI
+    uniqueID: 865971163
     locked: 0

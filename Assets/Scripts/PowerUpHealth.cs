@@ -15,7 +15,7 @@ public class PowerUpHealth : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("PowerUpPickedup");
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<SpriteRenderer>().enabled = false;
-            playerHealth.regen += 5;
+            playerHealth.regen += 3;
 
             Destroy(gameObject, 2f);
         }

@@ -9,12 +9,17 @@ using UnityEngine.SceneManagement;
 public class MoleSpawner : MonoBehaviour
 {
 
+    public LandScape landScape;
     public GameObject diggingMole;
     public GameObject mommyMadMole;
     public GameObject machoMole;
     public GameObject moL;
     public TMP_Text finalWaveText;
-    public GameObject ground;
+
+    private float topSide;
+    private float rightSide;
+    private float bottomSide;
+    private float leftSide;
 
     public float moleTimer;
     public float spawnRate;
@@ -24,10 +29,18 @@ public class MoleSpawner : MonoBehaviour
     private bool theEnd;
     private float roundTimer;
 
+    private bool takingLongTime = false;
+
     void Start()
     {
-        Vector3 spawnLocation = new Vector3(Random.Range(-1.8f, 1.8f), Random.Range(-0.8f, 0.9f), 0);
+        topSide = landScape.topSide;
+        rightSide = landScape.rightSide;
+        bottomSide = landScape.bottomSide;
+        leftSide = landScape.leftSide;
+
+        Vector3 spawnLocation = landScape.GetRandomLocation();
         roundTimer = 0f;
+
     }
 
     void Update()
@@ -36,9 +49,9 @@ public class MoleSpawner : MonoBehaviour
         {
             moleTimer += spawnRate;
             num = Random.Range(1, 1001);
-            if (num != 1 && num > roundTimer + 100)
+            if (num != 1 && num > (roundTimer * 3))
             {
-                Vector3 spawnLocation = new Vector3(Random.Range(-1.8f, 1.8f), Random.Range(-.8f, .9f), 0);
+                Vector3 spawnLocation = landScape.GetRandomLocation();
                 Spawn(spawnLocation);
             }
             else if (num == 2)
@@ -54,9 +67,9 @@ public class MoleSpawner : MonoBehaviour
                 }
 
             }
-            else if (num <= roundTimer + 100)
+            else if (num <= (roundTimer * 3))
             {
-                Vector3 spawnLocation = new Vector3(Random.Range(-1.8f, 1.8f), Random.Range(-.8f, .9f), 0);
+                Vector3 spawnLocation = landScape.GetRandomLocation();
                 SpawnMacho(spawnLocation);
             }
 
@@ -70,7 +83,7 @@ public class MoleSpawner : MonoBehaviour
     {
         if (spawnRate > 0.03f)
         {
-            spawnRate -= (spawnRate / 750);
+            spawnRate -= (spawnRate / 500);
         } else if(!theEnd)
         {
             spawnRate = 0.03f;
@@ -96,19 +109,19 @@ public class MoleSpawner : MonoBehaviour
     public IEnumerator SpawnWave(int least, int most, bool macho, bool endingMommyMole)
     {
 
-        Vector3 spawnLocation = new Vector3(Random.Range(-1.8f, 1.8f), Random.Range(-0.8f, 0.9f), 0);
+        Vector3 loc = new Vector3(Random.Range(leftSide, rightSide), Random.Range(topSide, bottomSide), 0);
 
         diggingMolesInWave = Random.Range(least, most);
 
         for (int i = 0; i < diggingMolesInWave; i++)
         {
-            spawnLocation += new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
+            loc += new Vector3(Random.Range(0.1f, 0.2f), Random.Range(0.1f, 0.2f), 0);
             if(macho)
             {
-                SpawnMacho(spawnLocation);
+                SpawnMacho(loc);
             } else
             {
-                Spawn(spawnLocation);
+                Spawn(loc);
             }
 
 
@@ -118,7 +131,7 @@ public class MoleSpawner : MonoBehaviour
         if(endingMommyMole)
         {
             FindObjectOfType<AudioManager>().Play("MommyMoleSpawn");
-            Instantiate(mommyMadMole, spawnLocation, transform.rotation);
+            Instantiate(mommyMadMole, loc, transform.rotation);
         }
 
         yield return null;
@@ -135,52 +148,33 @@ public class MoleSpawner : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
 
-        for (int i = 0; i < 400; i++)
+        for (int i = 0; i < 200; i++)
         {
-            Vector3 spawnLocation = new Vector3(Random.Range(-1.8f, 1.8f), Random.Range(-0.8f, 0.9f), 0);
+            Vector3 spawnLocation = landScape.GetRandomLocation();
             Spawn(spawnLocation);
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.01f);
         }
 
-        yield return new WaitForSeconds(2f);
-
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 25; i++)
         {
-            Vector3 spawnLocation = new Vector3(Random.Range(-1.8f, 1.8f), Random.Range(-0.8f, 0.9f), 0);
+            Vector3 spawnLocation = landScape.GetRandomLocation();
             FindObjectOfType<AudioManager>().Play("MommyMoleSpawn");
             Instantiate(mommyMadMole, spawnLocation, transform.rotation);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.25f);
         }
 
         yield return new WaitForSeconds(6f);
 
         finalWaveText.gameObject.SetActive(true);
-        finalWaveText.text = "Oh no...";
-        yield return new WaitForSeconds(1f);
-        finalWaveText.text = "It's near...";
-        yield return new WaitForSeconds(1f);
-        finalWaveText.text = "It's near...";
-        yield return new WaitForSeconds(1f);
-        finalWaveText.text = "FLY YOU FOOL!";
-        yield return new WaitForSeconds(0.5f);
 
-        for(int i = 0; i < 6; i++)
-        {
-            finalWaveText.text = "&$#(@$(";
-            yield return new WaitForSeconds(0.03f);
-            finalWaveText.text = "@)(Q!%#";
-            yield return new WaitForSeconds(0.03f);
-            finalWaveText.text = "J#)*(&*";
-            yield return new WaitForSeconds(0.03f);
-            finalWaveText.text = "FN#)@(%";
-            yield return new WaitForSeconds(0.03f);
-        }
+        finalWaveText.text = "An abomina-chin draws near...";
+        yield return new WaitForSeconds(2f);
 
         finalWaveText.gameObject.SetActive(false);
 
-        ground.GetComponent<SpriteRenderer>().color = Color.black;
+        landScape.ChangeRoom("stone");
 
         FindObjectOfType<AudioManager>().Stop("BemyBMowdown");
         FindObjectOfType<AudioManager>().Play("Battle");
@@ -190,37 +184,72 @@ public class MoleSpawner : MonoBehaviour
         while(boss != null)
         {
             Vector3 spawnLocation = new Vector3(0, 0, 0);
-            int num = Random.Range(0, 4);
-            if(num == 0)
-            {
-                spawnLocation = new Vector3(-1.8f, -0.8f, 0f);
-            }
-            else if(num == 1)
-            {
-                spawnLocation = new Vector3(1.8f, -0.8f, 0f);
-            }
-            else if (num == 2)
-            {
-                spawnLocation = new Vector3(1.8f, 0.8f, 0f);
-            }
-            else if (num == 3)
-            {
-                spawnLocation = new Vector3(-1.8f, 0.8f, 0f);
-            }
-            Instantiate(mommyMadMole, spawnLocation, transform.rotation);
-
-            for(int i = 0; i < Random.Range(0, 15); i++)
-            {
-                spawnLocation = new Vector3(Random.Range(-1.8f, 1.8f), Random.Range(-0.8f, 0.9f), 0);
-                Spawn(spawnLocation);
-            }
 
 
-            yield return new WaitForSeconds(Random.Range(0.35f, 0.7f));
+            if(takingLongTime)
+            {
+                GameObject mole;
+                spawnLocation = new Vector3(leftSide, bottomSide, 0f);
+                FindObjectOfType<AudioManager>().Play("MoleSpawn");
+                mole = Instantiate(diggingMole, spawnLocation, transform.rotation);
+                mole.GetComponent<DiggingMoleMovement>().moveSpeed *= 5;
+                spawnLocation = new Vector3(rightSide, bottomSide, 0f);
+                FindObjectOfType<AudioManager>().Play("MoleSpawn");
+                mole = Instantiate(diggingMole, spawnLocation, transform.rotation);
+                mole.GetComponent<DiggingMoleMovement>().moveSpeed *= 5;
+                spawnLocation = new Vector3(rightSide, topSide, 0f);
+                FindObjectOfType<AudioManager>().Play("MoleSpawn");
+                mole = Instantiate(diggingMole, spawnLocation, transform.rotation);
+                mole.GetComponent<DiggingMoleMovement>().moveSpeed *= 5;
+                spawnLocation = new Vector3(leftSide, topSide, 0f);
+                FindObjectOfType<AudioManager>().Play("MoleSpawn");
+                mole = Instantiate(diggingMole, spawnLocation, transform.rotation);
+                mole.GetComponent<DiggingMoleMovement>().moveSpeed *= 5;
+
+                yield return new WaitForSeconds(Random.Range(0.15f, 0.25f));
+            } else
+            {
+                int num = Random.Range(0, 4);
+                if (num == 0)
+                {
+                    spawnLocation = new Vector3(leftSide, bottomSide, 0f);
+                }
+                else if (num == 1)
+                {
+                    spawnLocation = new Vector3(rightSide, bottomSide, 0f);
+                }
+                else if (num == 2)
+                {
+                    spawnLocation = new Vector3(rightSide, topSide, 0f);
+                }
+                else if (num == 3)
+                {
+                    spawnLocation = new Vector3(leftSide, topSide, 0f);
+                }
+                Instantiate(mommyMadMole, spawnLocation, transform.rotation);
+
+                for (int i = 0; i < Random.Range(0, 15); i++)
+                {
+                    spawnLocation = landScape.GetRandomLocation();
+                    Spawn(spawnLocation);
+                }
+
+
+                yield return new WaitForSeconds(Random.Range(0.35f, 0.7f));
+            }
+
+            if(Time.timeSinceLevelLoad > 100)
+            {
+                takingLongTime = true;
+            }
+
+
         }
 
         yield return null;
     }
+
+
 
     public void HasWon()
     {

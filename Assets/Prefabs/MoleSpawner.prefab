@@ -53,5 +53,5 @@ MonoBehaviour:
   finalWaveText: {fileID: 1023457593392956395, guid: db9fe0ea9a5a5dd4a85a040650fd6d62,
     type: 3}
   ground: {fileID: 4721376033650013702, guid: 5cde135bab9da334daad7243ca5bae24, type: 3}
-  moleTimer: 2
-  spawnRate: 2
+  moleTimer: 1
+  spawnRate: 1

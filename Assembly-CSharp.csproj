@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\MoleSpawner.cs" />
      <Compile Include="Assets\Scripts\PowerUpShoot.cs" />
      <Compile Include="Assets\Scripts\DiggingMoleMovement.cs" />
+     <Compile Include="Assets\Scripts\PUPromise.cs" />
      <Compile Include="Assets\Scripts\PowerUpSpawner.cs" />
      <Compile Include="Assets\Scripts\Shooting.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
@@ -66,6 +67,7 @@
      <Compile Include="Assets\Scripts\Damage.cs" />
      <Compile Include="Assets\Scripts\PowerUpStrongerBullets.cs" />
      <Compile Include="Assets\Scripts\PowerUpMana.cs" />
+     <Compile Include="Assets\LandScape.cs" />
      <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Score.cs" />
      <Compile Include="Assets\Scripts\AudioManager.cs" />

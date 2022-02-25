@@ -5,20 +5,28 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-
+    public LandScape landScape;
+    private PlayerHealth playerHealth;
     public Transform firePoint;
     public GameObject bulletPrefab;
     public GameObject rapidBulletPrefab;
-    public BoxCollider2D playerCollider;
+    public CapsuleCollider2D playerCollider;
     private BoxCollider2D bulletCollider;
+
+    private float manaTimer;
+    private float manaTime;
+
+    private float topSide;
+    private float rightSide;
+    private float leftSide;
 
     public int resistance = 0;
     public float bulletForce = 5f;
     public bool hasPowerup = false;
     private float shootTimer;
-    public float normalShootTime = 0.2f;
-    public float powerUpShootTime = 0.05f;
-    public bool hasShootControl = true;
+    public float normalShootTime;
+    public float powerUpShootTime;
+    public bool hasControl = true;
     private float powerUpTimer;
     public float PowerUpTimer {
         get
@@ -31,7 +39,18 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    void Start() { shootTimer = normalShootTime; }
+    void Start()
+    {
+        shootTimer = normalShootTime;
+        manaTime = 0.1f;
+        manaTimer = manaTime;
+
+        playerHealth = GetComponent<PlayerHealth>();
+
+        topSide = landScape.topSide;
+        rightSide = landScape.rightSide;
+        leftSide = landScape.leftSide;
+    }
 
     void Update()
     {
@@ -39,7 +58,7 @@ public class Shooting : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 9);
         Physics2D.IgnoreLayerCollision(9, 9);
 
-        if (hasShootControl)
+        if (hasControl)
         {
             if (Input.GetButton("Fire1") && shootTimer <= 0f)
             {
@@ -52,6 +71,24 @@ public class Shooting : MonoBehaviour
             powerUpTimer -= Time.deltaTime;
         }
         shootTimer -= Time.deltaTime;
+
+
+        if (hasControl == true)
+        {
+
+            if (manaTimer < 0 && Input.GetButton("Fire2") && playerHealth.currentMana >= 50)
+            {
+                playerHealth.UseMana(50);
+                manaTimer = manaTime;
+
+                for (int i = 0; i < playerHealth.manaAttackLevel; i++)
+                {
+                    ManaAttack();
+                }
+            }
+
+        }
+        manaTimer -= Time.deltaTime;
     }
 
     void Shoot(bool powerUp)
@@ -79,4 +116,20 @@ public class Shooting : MonoBehaviour
         rb.rotation = rb.rotation + 180;
     }
 
+    public void ManaAttack()
+    {
+        FindObjectOfType<AudioManager>().Play("PowerUpManaUse");
+
+        Vector3 spawnLocation = new Vector3(Random.Range(leftSide, rightSide), topSide, 0);
+
+        GameObject bullet = Instantiate(bulletPrefab, spawnLocation, transform.rotation);
+
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.SetResistance(resistance);
+
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(new Vector3(0, -1, 0) * bulletForce / 2, ForceMode2D.Impulse);
+
+        rb.rotation = rb.rotation + 180;
+    }
 }
